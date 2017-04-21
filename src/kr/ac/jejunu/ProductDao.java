@@ -8,7 +8,11 @@ import java.sql.SQLException;
 public class ProductDao {
     ConnectionMaker connectionMaker;
 
-    public ProductDao(ConnectionMaker connectionMaker) {
+    public ConnectionMaker getConnectionMaker() {
+        return connectionMaker;
+    }
+
+    public void setConnectionMaker(ConnectionMaker connectionMaker) {
         this.connectionMaker = connectionMaker;
     }
 

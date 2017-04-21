@@ -19,14 +19,14 @@ public class JdbcContext {
         this.dataSource = dataSource;
     }
 
-    public Product jdbcContextWithStatementStrategyForGet(Long id, StatementStrategy statementStrategy) throws SQLException {
+    public Product jdbcContextWithStatementStrategyForGet(StatementStrategy statementStrategy) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         Product product = null;
         try {
             connection = dataSource.getConnection();
-            preparedStatement = statementStrategy.makeStatement(connection, id);
+            preparedStatement = statementStrategy.makeStatement(connection);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 product = new Product();
@@ -60,12 +60,12 @@ public class JdbcContext {
         return product;
     }
 
-    public void jdbcContextWithStatementStrategyForAdd(Product product, StatementStrategy statementStrategy) throws SQLException {
+    public void jdbcContextWithStatementStrategyForAdd(StatementStrategy statementStrategy) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
             connection = dataSource.getConnection();
-            preparedStatement = statementStrategy.makeStatement(connection, product);
+            preparedStatement = statementStrategy.makeStatement(connection);
             preparedStatement.execute();
         } finally {
             if (preparedStatement != null) {

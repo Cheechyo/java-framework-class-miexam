@@ -19,4 +19,16 @@ public class ProductDao {
         connection.close();
         return product;
     }
+
+    public void add(Product product) throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://117.17.102.106/jeju", "root", "1234");
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO product VALUES(?, ?, ?)");
+        preparedStatement.setLong(1, product.getId());
+        preparedStatement.setString(2, product.getTitle());
+        preparedStatement.setInt(3, product.getPrice());
+        preparedStatement.execute();
+        preparedStatement.close();
+        connection.close();
+    }
 }

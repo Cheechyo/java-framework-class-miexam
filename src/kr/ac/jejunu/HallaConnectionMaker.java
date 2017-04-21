@@ -7,9 +7,9 @@ import java.sql.SQLException;
 /**
  * Created by Cheechyo on 2017. 4. 21..
  */
-public class HallaProductDao extends ProductDao {
+public class HallaConnectionMaker implements ConnectionMaker {
     @Override
-    Connection getConnection() throws ClassNotFoundException, SQLException {
+    public Connection getConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
         return DriverManager.getConnection("jdbc:mysql://117.17.102.106/jeju", "root", "1234");
     }
